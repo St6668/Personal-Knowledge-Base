@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% set active_page = 'knowledge' %}
+
+{% block title %}知识管理 — 个人知识库系统{% endblock %}
+
+{% block head_extra %}
+<style>
+    .kb-panel {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: var(--space-lg);
+        min-height: calc(100vh - var(--content-padding) * 2);
+    }
+
+    .kb-sidebar {
+        background: var(--paper-white);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: var(--space-md);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .kb-sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--space-sm);
+        padding: 0 8px;
+    }
+
+    .kb-sidebar-header h3 {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-heading);
+    }
+
+    .kb-list {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .kb-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .kb-toolbar {
+        display: flex;
+        gap: var(--space-sm);
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .kb-toolbar .search-box {
+        flex: 1;
+        min-width: 200px;
+        max-width: 400px;
+        position: relative;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="kb-panel">
+    <!-- 左侧：知识库列表 -->
+    <div class="kb-sidebar">
+        <div class="kb-sidebar-header">
+            <h3>知识库</h3>
+            <button class="btn btn-ghost btn-sm" id="btn-new-kb" title="新建知识库">+</button>
+        </div>
+        <div class="kb-list" id="kb-list">
+            <div class="loading-state"><div class="spinner"></div></div>
+        </div>
+    </div>
+
+    <!-- 右侧：文档管理 -->
+    <div class="kb-content">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>📚 知识库管理</h1>
+            <p>管理你的知识文档，上传文件或创建笔记</p>
+        </div>
+
+        <!-- 工具栏 -->
+        <div class="kb-toolbar">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="form-input" id="search-input" placeholder="搜索知识库内容...">
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <button class="btn btn-primary" id="btn-upload">
+                <span>📤</span> 上传文档
+            </button>
+            <button class="btn btn-secondary" id="btn-new-note">
+                <span>✏️</span> 新建笔记
+            </button>
+        </div>
+
+        <!-- 文档计数 -->
+        <div class="text-sm text-muted">
+            当前知识库：<span id="doc-count" style="color:var(--text-heading);font-weight:500;">0 个文档</span>
+        </div>
+
+        <!-- 文档卡片网格 -->
+        <div class="doc-grid" id="doc-grid">
+            <div class="loading-state" style="grid-column: 1 / -1;">
+                <div class="spinner"></div>
+                <span>加载文档中...</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/knowledge.js') }}"></script>
+{% endblock %}

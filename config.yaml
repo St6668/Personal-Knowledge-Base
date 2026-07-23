@@ -1,0 +1,18 @@
+deepseek:
+  api_key: "your-api-key-here"          # 用户填入 DeepSeek API Key
+  base_url: "https://api.deepseek.com"
+  chat_model: "deepseek-v4-flash"
+
+embedding:
+  model_name: "BAAI/bge-small-zh-v1.5"
+  device: "cpu"
+  # 国内用户需要使用 HuggingFace 镜像下载模型，推荐 hf-mirror.com
+  hf_endpoint: "https://hf-mirror.com"
+
+database:
+  sqlite_path: "data/knowledge.db"
+  chromadb_path: "data/chroma"
+
+server:
+  host: "127.0.0.1"
+  port: 8000

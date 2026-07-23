@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% set active_page = 'plan' %}
+
+{% block title %}学习计划 — 个人知识库系统{% endblock %}
+
+{% block head_extra %}
+<style>
+    .plan-generator-form .form-group {
+        margin-bottom: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 页面标题 -->
+<div class="page-header">
+    <h1>📋 学习计划</h1>
+    <p>AI 根据知识库内容生成系统化的学习方案</p>
+</div>
+
+<!-- 生成面板 -->
+<div class="plan-generator">
+    <h3>生成新计划</h3>
+    <div class="plan-generator-form">
+        <div class="form-group">
+            <label class="form-label">选择知识库</label>
+            <select class="form-select" id="gen-kb-select">
+                <option value="">加载中...</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">筛选标签（可选，可多选）</label>
+            <select class="form-select" id="gen-tag-select" multiple size="1" style="height:42px;">
+                <option value="">加载中...</option>
+            </select>
+            <div class="form-hint">按住 Ctrl 多选</div>
+        </div>
+        <button class="btn btn-primary btn-lg" id="btn-generate" style="align-self:flex-end;">
+            生成计划
+        </button>
+    </div>
+</div>
+
+<!-- 计划列表 -->
+<div class="plan-list" id="plan-list">
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <span>加载计划中...</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/plan.js') }}"></script>
+{% endblock %}

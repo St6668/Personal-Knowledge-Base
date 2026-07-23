@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}个人知识库系统{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <div class="app-layout">
+        <!-- 侧边栏 -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">库</div>
+                <span class="sidebar-brand-text">个人知识库</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('knowledge_home') }}" class="{% if active_page == 'knowledge' %}active{% endif %}">
+                    <span class="sidebar-nav-icon">📚</span>
+                    <span>知识管理</span>
+                </a>
+                <a href="{{ url_for('chat_page') }}" class="{% if active_page == 'chat' %}active{% endif %}">
+                    <span class="sidebar-nav-icon">💬</span>
+                    <span>AI 对话</span>
+                </a>
+                <a href="{{ url_for('plan_page') }}" class="{% if active_page == 'plan' %}active{% endif %}">
+                    <span class="sidebar-nav-icon">📋</span>
+                    <span>学习计划</span>
+                </a>
+                <a href="{{ url_for('exam_page') }}" class="{% if active_page == 'exam' %}active{% endif %}">
+                    <span class="sidebar-nav-icon">📝</span>
+                    <span>考察</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                个人知识库系统 v0.1
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="app-main">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- 基础脚本 -->
+    <script src="{{ url_for('static', path='/js/app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+aiosqlite
+chromadb
+sentence-transformers
+modelscope
+httpx
+python-multipart
+jinja2
+python-docx
+pdfplumber
+xmindparser
+pyyaml
+python-dotenv

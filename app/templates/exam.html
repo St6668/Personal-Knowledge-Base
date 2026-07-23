@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set active_page = 'exam' %}
+
+{% block title %}AI 考察 — 个人知识库系统{% endblock %}
+
+{% block head_extra %}
+<style>
+    .exam-page-container {
+        max-width: 760px;
+        margin: 0 auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="exam-page-container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+        <h1>📝 AI 面试考察</h1>
+        <p>通过对话式问答检验你的知识掌握程度</p>
+    </div>
+
+    <!-- 考察内容区（动态渲染） -->
+    <div id="exam-container">
+        <div class="loading-state">
+            <div class="spinner spinner-lg"></div>
+            <span>初始化中...</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/exam.js') }}"></script>
+{% endblock %}

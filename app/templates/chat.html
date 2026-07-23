@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% set active_page = 'chat' %}
+
+{% block title %}AI 对话 — 个人知识库系统{% endblock %}
+
+{% block head_extra %}
+<style>
+    /* 聊天页面全高布局 */
+    .app-main {
+        padding-bottom: 0;
+    }
+
+    .chat-page-container {
+        height: calc(100vh - var(--content-padding));
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-page-header {
+        padding-bottom: var(--space-md);
+        flex-shrink: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="chat-page-container">
+    <!-- 页面标题 -->
+    <div class="chat-page-header">
+        <div class="page-header" style="margin-bottom:0;">
+            <h1>💬 AI 对话</h1>
+            <p>基于知识库内容的智能问答助手</p>
+        </div>
+    </div>
+
+    <!-- 聊天布局 -->
+    <div class="chat-layout" style="flex:1;">
+        <!-- 左侧对话列表 -->
+        <div class="chat-sidebar">
+            <div class="chat-sidebar-header">
+                <button class="btn btn-primary btn-sm w-full" id="btn-new-conv">+ 新建对话</button>
+            </div>
+            <div class="chat-conv-list" id="conv-list">
+                <div class="loading-state"><div class="spinner"></div></div>
+            </div>
+        </div>
+
+        <!-- 右侧聊天主区域 -->
+        <div class="chat-main">
+            <!-- 对话头部 -->
+            <div class="chat-header">
+                <span class="chat-header-title" id="chat-header-title">AI 对话</span>
+                <span class="chat-header-badge" id="chat-header-badge"></span>
+            </div>
+
+            <!-- 空状态 -->
+            <div class="chat-empty" id="chat-empty">
+                <div class="chat-empty-icon">💬</div>
+                <div class="chat-empty-title">选择一个对话开始</div>
+                <p>从左侧列表选择已有对话，或点击上方按钮创建新对话</p>
+            </div>
+
+            <!-- 消息列表 -->
+            <div class="chat-messages" id="chat-messages" style="display:none;"></div>
+
+            <!-- 输入区 -->
+            <div class="chat-input-area">
+                <textarea
+                    class="form-textarea"
+                    id="message-input"
+                    rows="1"
+                    placeholder="输入你的问题...（Enter 发送，Shift+Enter 换行）"
+                    disabled
+                ></textarea>
+                <button class="btn btn-primary" id="send-btn" disabled>发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/chat.js') }}"></script>
+{% endblock %}
